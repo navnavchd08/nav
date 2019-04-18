@@ -2,24 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "connections_aznorwest_location": {
-            "value": null
-        },
-        "connections_aznorwest_location_1": {
-            "value": null
-        },
-        "connections_azwestnor_location": {
-            "value": null
-        },
-        "connections_azwestnor_location_1": {
-            "value": null
-        },
-        "connections_aznorwest_name": {
-            "value": null
-        },
-        "connections_azwestnor_name": {
-            "value": null
-        },
         "virtualNetworks_west1_name": {
             "value": null
         },
@@ -33,12 +15,6 @@
             "value": null
         },
         "networkInterfaces_azwim1_name": {
-            "value": null
-        },
-        "publicIPAddresses_azvnetgate_name": {
-            "value": null
-        },
-        "publicIPAddresses_mygatewest_name": {
             "value": null
         },
         "networkInterfaces_azwim3VMNic_name": {
@@ -56,19 +32,10 @@
         "publicIPAddresses_azwim3PublicIP_name": {
             "value": null
         },
-        "virtualNetworkGateways_azvpngate_name": {
-            "value": null
-        },
-        "virtualNetworkGateways_azwestgate_name": {
-            "value": null
-        },
         "publicIPAddresses_myPublicIpAddress_name": {
             "value": null
         },
         "networkSecurityGroups_myNetworkSecurityGroup_name": {
-            "value": null
-        },
-        "disks_azwim1_OsDisk_1_c698f54972a54e17b204b80a2fd0f396_name": {
             "value": null
         }
     }

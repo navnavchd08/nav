@@ -2,30 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "connections_aznorwest_location": {
-            "defaultValue": null,
-            "type": "SecureString"
-        },
-        "connections_aznorwest_location_1": {
-            "defaultValue": null,
-            "type": "SecureString"
-        },
-        "connections_azwestnor_location": {
-            "defaultValue": null,
-            "type": "SecureString"
-        },
-        "connections_azwestnor_location_1": {
-            "defaultValue": null,
-            "type": "SecureString"
-        },
-        "connections_aznorwest_name": {
-            "defaultValue": "aznorwest",
-            "type": "String"
-        },
-        "connections_azwestnor_name": {
-            "defaultValue": "azwestnor",
-            "type": "String"
-        },
         "virtualNetworks_west1_name": {
             "defaultValue": "west1",
             "type": "String"
@@ -44,14 +20,6 @@
         },
         "networkInterfaces_azwim1_name": {
             "defaultValue": "azwim1",
-            "type": "String"
-        },
-        "publicIPAddresses_azvnetgate_name": {
-            "defaultValue": "azvnetgate",
-            "type": "String"
-        },
-        "publicIPAddresses_mygatewest_name": {
-            "defaultValue": "mygatewest",
             "type": "String"
         },
         "networkInterfaces_azwim3VMNic_name": {
@@ -74,14 +42,6 @@
             "defaultValue": "azwim3PublicIP",
             "type": "String"
         },
-        "virtualNetworkGateways_azvpngate_name": {
-            "defaultValue": "azvpngate",
-            "type": "String"
-        },
-        "virtualNetworkGateways_azwestgate_name": {
-            "defaultValue": "azwestgate",
-            "type": "String"
-        },
         "publicIPAddresses_myPublicIpAddress_name": {
             "defaultValue": "myPublicIpAddress",
             "type": "String"
@@ -89,84 +49,10 @@
         "networkSecurityGroups_myNetworkSecurityGroup_name": {
             "defaultValue": "myNetworkSecurityGroup",
             "type": "String"
-        },
-        "disks_azwim1_OsDisk_1_c698f54972a54e17b204b80a2fd0f396_name": {
-            "defaultValue": "azwim1_OsDisk_1_c698f54972a54e17b204b80a2fd0f396",
-            "type": "String"
         }
     },
     "variables": {},
     "resources": [
-        {
-            "type": "Microsoft.Compute/disks",
-            "apiVersion": "2018-06-01",
-            "name": "[parameters('disks_azwim1_OsDisk_1_c698f54972a54e17b204b80a2fd0f396_name')]",
-            "location": "northeurope",
-            "sku": {
-                "name": "Premium_LRS",
-                "tier": "Premium"
-            },
-            "properties": {
-                "osType": "Windows",
-                "creationData": {
-                    "createOption": "FromImage",
-                    "imageReference": {
-                        "id": "/Subscriptions/89d8ab0c-0e6a-43ab-bd76-505e0f5571aa/Providers/Microsoft.Compute/Locations/northeurope/Publishers/MicrosoftWindowsServer/ArtifactTypes/VMImage/Offers/WindowsServer/Skus/2016-Datacenter/Versions/2016.127.20190410"
-                    }
-                },
-                "diskSizeGB": 127,
-                "diskIOPSReadWrite": 500,
-                "diskMBpsReadWrite": 100
-            }
-        },
-        {
-            "type": "Microsoft.Network/connections",
-            "apiVersion": "2018-12-01",
-            "name": "[parameters('connections_aznorwest_name')]",
-            "location": "northeurope",
-            "properties": {
-                "resourceGuid": "02db7aab-c0c9-4d73-a0f4-aaa7dc357d08",
-                "virtualNetworkGateway1": {
-                    "location": "[parameters('connections_aznorwest_location')]",
-                    "properties": {}
-                },
-                "virtualNetworkGateway2": {
-                    "location": "[parameters('connections_aznorwest_location_1')]",
-                    "properties": {}
-                },
-                "connectionType": "Vnet2Vnet",
-                "connectionProtocol": "IKEv2",
-                "routingWeight": 0,
-                "enableBgp": false,
-                "usePolicyBasedTrafficSelectors": false,
-                "ipsecPolicies": [],
-                "expressRouteGatewayBypass": false
-            }
-        },
-        {
-            "type": "Microsoft.Network/connections",
-            "apiVersion": "2018-12-01",
-            "name": "[parameters('connections_azwestnor_name')]",
-            "location": "westeurope",
-            "properties": {
-                "resourceGuid": "4b9c4ff6-3672-48c1-81e1-0576ae65b463",
-                "virtualNetworkGateway1": {
-                    "location": "[parameters('connections_azwestnor_location')]",
-                    "properties": {}
-                },
-                "virtualNetworkGateway2": {
-                    "location": "[parameters('connections_azwestnor_location_1')]",
-                    "properties": {}
-                },
-                "connectionType": "Vnet2Vnet",
-                "connectionProtocol": "IKEv2",
-                "routingWeight": 0,
-                "enableBgp": false,
-                "usePolicyBasedTrafficSelectors": false,
-                "ipsecPolicies": [],
-                "expressRouteGatewayBypass": false
-            }
-        },
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2018-12-01",
@@ -648,25 +534,6 @@
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2018-12-01",
-            "name": "[parameters('publicIPAddresses_azvnetgate_name')]",
-            "location": "northeurope",
-            "sku": {
-                "name": "Basic",
-                "tier": "Regional"
-            },
-            "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "dfaf373d-1d3c-4da6-907f-30fd1c46542f",
-                "ipAddress": "52.169.75.28",
-                "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Dynamic",
-                "idleTimeoutInMinutes": 4,
-                "ipTags": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "2018-12-01",
             "name": "[parameters('publicIPAddresses_azwim2PublicIP_name')]",
             "location": "northeurope",
             "sku": {
@@ -695,25 +562,6 @@
                 "provisioningState": "Succeeded",
                 "resourceGuid": "ef42dde4-9af1-4181-9f9e-b94905dcb389",
                 "ipAddress": "104.40.203.46",
-                "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Dynamic",
-                "idleTimeoutInMinutes": 4,
-                "ipTags": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "2018-12-01",
-            "name": "[parameters('publicIPAddresses_mygatewest_name')]",
-            "location": "westeurope",
-            "sku": {
-                "name": "Basic",
-                "tier": "Regional"
-            },
-            "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "f8041f20-a8f3-450d-9328-4c3ec90db750",
-                "ipAddress": "13.93.43.211",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -753,92 +601,16 @@
                 "resourceGuid": "0959b2d6-e0dd-4b0c-a290-73836e98e4f4",
                 "addressSpace": {
                     "addressPrefixes": [
-                        "10.10.10.0/24"
+                        "10.10.10.0/26"
                     ]
                 },
                 "subnets": [
                     {
                         "name": "default",
-                        "etag": "W/\"faae78fd-aa7d-4f34-a0bc-b6d6323f4677\"",
+                        "etag": "W/\"039d6779-cde5-440e-be6c-a752946c94bd\"",
                         "properties": {
                             "provisioningState": "Succeeded",
                             "addressPrefix": "10.10.10.0/26",
-                            "serviceEndpoints": [],
-                            "delegations": []
-                        }
-                    },
-                    {
-                        "name": "GatewaySubnet",
-                        "etag": "W/\"faae78fd-aa7d-4f34-a0bc-b6d6323f4677\"",
-                        "properties": {
-                            "provisioningState": "Succeeded",
-                            "addressPrefix": "10.10.10.64/28",
-                            "serviceEndpoints": [
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.AzureActiveDirectory",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.AzureCosmosDB",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.ContainerRegistry",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.EventHub",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.KeyVault",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.ServiceBus",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.Sql",
-                                    "locations": [
-                                        "northeurope"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.Storage",
-                                    "locations": [
-                                        "northeurope",
-                                        "westeurope"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.Web",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                }
-                            ],
                             "delegations": []
                         }
                     }
@@ -858,93 +630,16 @@
                 "resourceGuid": "c5c5345b-33ae-4c09-bc36-2b93009b0ff8",
                 "addressSpace": {
                     "addressPrefixes": [
-                        "10.20.20.0/24",
-                        "10.21.20.0/24"
+                        "10.20.20.0/26"
                     ]
                 },
                 "subnets": [
                     {
                         "name": "default",
-                        "etag": "W/\"91248375-bf6a-4581-a729-e165c4242b92\"",
+                        "etag": "W/\"61278dcd-672f-49c2-88f4-bfa9eb024962\"",
                         "properties": {
                             "provisioningState": "Succeeded",
                             "addressPrefix": "10.20.20.0/26",
-                            "serviceEndpoints": [],
-                            "delegations": []
-                        }
-                    },
-                    {
-                        "name": "GatewaySubnet",
-                        "etag": "W/\"91248375-bf6a-4581-a729-e165c4242b92\"",
-                        "properties": {
-                            "provisioningState": "Succeeded",
-                            "addressPrefix": "10.20.20.64/28",
-                            "serviceEndpoints": [
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.AzureActiveDirectory",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.AzureCosmosDB",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.ContainerRegistry",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.EventHub",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.KeyVault",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.ServiceBus",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.Sql",
-                                    "locations": [
-                                        "westeurope"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.Storage",
-                                    "locations": [
-                                        "westeurope",
-                                        "northeurope"
-                                    ]
-                                },
-                                {
-                                    "provisioningState": "Succeeded",
-                                    "service": "Microsoft.Web",
-                                    "locations": [
-                                        "*"
-                                    ]
-                                }
-                            ],
                             "delegations": []
                         }
                     }
@@ -975,12 +670,12 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_azwim1_name'), '_OsDisk_1_38b8a016759b4537b83e0a23a4814f77')]",
+                        "name": "[concat(parameters('virtualMachines_azwim1_name'), '_OsDisk_1_c698f54972a54e17b204b80a2fd0f396')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
                             "storageAccountType": "Premium_LRS",
-                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_azwim1_name'), '_OsDisk_1_38b8a016759b4537b83e0a23a4814f77'))]"
+                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_azwim1_name'), '_OsDisk_1_c698f54972a54e17b204b80a2fd0f396'))]"
                         },
                         "diskSizeGB": 127
                     },
@@ -1158,7 +853,6 @@
             "properties": {
                 "provisioningState": "Succeeded",
                 "addressPrefix": "10.10.10.0/26",
-                "serviceEndpoints": [],
                 "delegations": []
             }
         },
@@ -1172,268 +866,7 @@
             "properties": {
                 "provisioningState": "Succeeded",
                 "addressPrefix": "10.20.20.0/26",
-                "serviceEndpoints": [],
                 "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2018-12-01",
-            "name": "[concat(parameters('virtualNetworks_north1_name'), '/GatewaySubnet')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_north1_name'))]"
-            ],
-            "properties": {
-                "provisioningState": "Succeeded",
-                "addressPrefix": "10.10.10.64/28",
-                "serviceEndpoints": [
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.AzureActiveDirectory",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.AzureCosmosDB",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.ContainerRegistry",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.EventHub",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.KeyVault",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.ServiceBus",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.Sql",
-                        "locations": [
-                            "northeurope"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.Storage",
-                        "locations": [
-                            "northeurope",
-                            "westeurope"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.Web",
-                        "locations": [
-                            "*"
-                        ]
-                    }
-                ],
-                "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2018-12-01",
-            "name": "[concat(parameters('virtualNetworks_west1_name'), '/GatewaySubnet')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_west1_name'))]"
-            ],
-            "properties": {
-                "provisioningState": "Succeeded",
-                "addressPrefix": "10.20.20.64/28",
-                "serviceEndpoints": [
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.AzureActiveDirectory",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.AzureCosmosDB",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.ContainerRegistry",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.EventHub",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.KeyVault",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.ServiceBus",
-                        "locations": [
-                            "*"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.Sql",
-                        "locations": [
-                            "westeurope"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.Storage",
-                        "locations": [
-                            "westeurope",
-                            "northeurope"
-                        ]
-                    },
-                    {
-                        "provisioningState": "Succeeded",
-                        "service": "Microsoft.Web",
-                        "locations": [
-                            "*"
-                        ]
-                    }
-                ],
-                "delegations": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworkGateways",
-            "apiVersion": "2018-12-01",
-            "name": "[parameters('virtualNetworkGateways_azvpngate_name')]",
-            "location": "northeurope",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_azvnetgate_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_north1_name'), 'GatewaySubnet')]"
-            ],
-            "properties": {
-                "resourceGuid": "890c9329-700f-482b-9c30-0ff8c27dd2eb",
-                "ipConfigurations": [
-                    {
-                        "name": "default",
-                        "etag": "W/\"95092e85-587c-4340-bb6f-13af98b7bda4\"",
-                        "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_azvnetgate_name'))]"
-                            },
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_north1_name'), 'GatewaySubnet')]"
-                            }
-                        }
-                    }
-                ],
-                "sku": {
-                    "name": "VpnGw1",
-                    "tier": "VpnGw1",
-                    "capacity": 2
-                },
-                "gatewayType": "Vpn",
-                "vpnType": "RouteBased",
-                "enableBgp": false,
-                "activeActive": false,
-                "vpnClientConfiguration": {
-                    "vpnClientProtocols": [
-                        "SSTP",
-                        "IkeV2"
-                    ],
-                    "vpnClientRootCertificates": [],
-                    "vpnClientRevokedCertificates": [],
-                    "vpnClientIpsecPolicies": []
-                },
-                "bgpSettings": {
-                    "asn": 65515,
-                    "bgpPeeringAddress": "10.10.10.78",
-                    "peerWeight": 0
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworkGateways",
-            "apiVersion": "2018-12-01",
-            "name": "[parameters('virtualNetworkGateways_azwestgate_name')]",
-            "location": "westeurope",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_mygatewest_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_west1_name'), 'GatewaySubnet')]"
-            ],
-            "properties": {
-                "resourceGuid": "091d1983-5fb9-4460-90dd-7801a8077b1b",
-                "ipConfigurations": [
-                    {
-                        "name": "default",
-                        "etag": "W/\"c0ccab96-c122-4865-bc00-96295bfbf012\"",
-                        "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_mygatewest_name'))]"
-                            },
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_west1_name'), 'GatewaySubnet')]"
-                            }
-                        }
-                    }
-                ],
-                "sku": {
-                    "name": "VpnGw1",
-                    "tier": "VpnGw1",
-                    "capacity": 2
-                },
-                "gatewayType": "Vpn",
-                "vpnType": "RouteBased",
-                "enableBgp": false,
-                "activeActive": false,
-                "vpnClientConfiguration": {
-                    "vpnClientProtocols": [
-                        "SSTP",
-                        "IkeV2"
-                    ],
-                    "vpnClientRootCertificates": [],
-                    "vpnClientRevokedCertificates": [],
-                    "vpnClientIpsecPolicies": []
-                },
-                "bgpSettings": {
-                    "asn": 65515,
-                    "bgpPeeringAddress": "10.20.20.78",
-                    "peerWeight": 0
-                }
             }
         },
         {
@@ -1452,7 +885,7 @@
                 "ipConfigurations": [
                     {
                         "name": "[parameters('networkInterfaces_azwim1_name')]",
-                        "etag": "W/\"dc952c34-25e2-467b-99c8-374ba6f7cb45\"",
+                        "etag": "W/\"bf9c49d9-2586-4a96-a145-02c828f0e03e\"",
                         "properties": {
                             "provisioningState": "Succeeded",
                             "privateIPAddress": "10.10.10.4",
